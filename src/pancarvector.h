@@ -3,7 +3,7 @@
 
 /**
     NOTE AUX CORRECTEURS:
-    J'explique ce code dans un pdf, dossier datasheets
+    J'explique ce code dans un pdf, dossier documents divers
 */
 
 #if ARDUINO >= 100
