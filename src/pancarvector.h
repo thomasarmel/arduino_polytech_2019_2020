@@ -14,7 +14,7 @@
   #include "WConstants.h"
 #endif
 
-namespace pancar /// Not really RAM-friendly at this time, must be improved
+namespace pancar
 {
 template <typename T>
     class Vector
