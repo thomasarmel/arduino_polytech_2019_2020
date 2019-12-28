@@ -3,7 +3,7 @@
 
 /**
     NOTE AUX CORRECTEURS:
-    J'explique ce code dans un pdf, dossier documents divers
+    J'explique ce code dans un pdf, dossier datasheets
 */
 
 #if ARDUINO >= 100
@@ -24,11 +24,13 @@ template <typename T>
         ~Vector();
         unsigned int size() const;
         void add(const T &element);
+        void addValue(T value);
         T &get(unsigned int index) const;
         T &operator[](unsigned int index) const;
         void operator+=(Vector<T> v);
         void operator+=(const T &element);
         bool remove(unsigned int index);
+        int searchPtr(T *ptr) const;
 
     protected:
         unsigned int m_size;
@@ -41,7 +43,15 @@ template <typename T>
 
     template <typename T>
     Vector<T>::~Vector()
-    {}
+    {
+        if(m_size>=2)
+        {
+            for(unsigned int i=1; i<m_size; i++)
+            {
+                remove(i); /// Not really clean, sorry...
+            }
+        }
+    }
 
     template <typename T>
     unsigned int Vector<T>::size() const
@@ -70,6 +80,12 @@ template <typename T>
             (*((void*(*)[2])pointerNext))[1]=(void*)elementArray;
         }
         m_size++;
+    }
+
+    template <typename T>
+    void Vector<T>::addValue(T value)
+    {
+        add(*(new T(value)));
     }
 
     template<typename T>
@@ -127,10 +143,34 @@ template <typename T>
             {
                 pointerNext=(*((void*(*)[2])pointerNext))[1];
             }
+            void **pointerToDelete=(void**)((*((void*(*)[2])pointerNext))[1]);
             (*((void*(*)[2])pointerNext))[1]=(*((void*(*)[2]) (*((void*(*)[2])pointerNext))[1] ))[1];
+            delete pointerToDelete;
         }
         m_size--;
         return true;
+    }
+
+    template<typename T>
+    int Vector<T>::searchPtr(T *ptr) const
+    {
+        if((T*)(m_firstElementArray[0])==ptr)
+        {
+            return 0;
+        }
+        if(m_size>=2)
+        {
+            void *pointerNext=(void*)&m_firstElementArray;
+            for(unsigned int i=1; i<m_size; i++)
+            {
+                pointerNext=(*((void*(*)[2])pointerNext))[1];
+                if((T*)((*((void*(*)[2])pointerNext))[0]) == ptr)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     template<typename T>
