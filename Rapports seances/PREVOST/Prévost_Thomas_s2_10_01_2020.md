@@ -25,7 +25,7 @@ J'ai eu beau chercher, je n'ai pas trouvé la moindre bibliothèque pour faire �
 Peut-être que la classe __GroupStepper__ va en hériter, à voir...
 Cette classe fonctionne par une récursivité sur des pointeurs de tableaux de pointeurs de référence de template. L'utilisation des pointeurs s'avère difficile en Arduino parce que comme on programme dans l'espace noyau, on ne bénéficie pas des protections de l'espace utilisateur (erreurs de segmentation...) et donc le code est difficile à valider. Pour plus d'infos: https://fr.wikipedia.org/wiki/Espace_noyau https://fr.wikipedia.org/wiki/Espace_utilisateur.
 D'autre part le compilateur fournit avec le logiciel Arduino (avr-g++) ne gère pas par défaut les exceptions (try, catch...). Il semblerait cependant qu'il soit possible d'activer cette fonctionnalité. Pour garder mon code le plus portable possible, j'ai décidé de ne pas utiliser les excptions. Il en résulte malheureusement un code un peu moins propre, et ce d'autant plus qu'on programme dans l'espace noyau.
-Je ne sais pas dans quelle mesure vous [le correcteur] êtes à l'aise avec les concepts avancés du langage C++ et les pointeurs. Au cas où le code de la classe Vector ne vous semblerai pas très limpide, j'ai prévu un pdf d'explication du code dans le dossier __documents divers__: __pancarvector - explications.pdf__.
+J'ai prévu un pdf d'explication du code dans le dossier __documents divers__: __pancarvector - explications.pdf__.
 
 
 
