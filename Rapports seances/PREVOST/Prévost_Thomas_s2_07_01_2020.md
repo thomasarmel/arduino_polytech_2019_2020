@@ -1,4 +1,4 @@
-**Rapport de séance du Vendredi 10 Janvier 2020 (séance 2):**
+**Rapport de séance du Mardi 7 Janvier 2020 (séance 2):**
 
 La séance d'avant les vacances (Vendredi 20 Décembre 2019) a été annulée pour cause de mauvais temps.
 
@@ -23,7 +23,7 @@ __GroupStepper:__ Permet de contrôler un groupe de moteurs pas-à-pas. En effet
 __Vector:__ Permet de créer des tableaux dynamiques, dans le style des collections de Java ou des conteneurs de la bibliothèque standard du C++ (qui n'est évidemment pas disponible en Arduino).
 J'ai eu beau chercher, je n'ai pas trouvé la moindre bibliothèque pour faire ça (c'est pourtant très pratique). Ca va nous être utile pour le dessin du pancake, qui est en réalité une collection de points (la classe Point est à faire, à voir si Clara veut la faire).
 Peut-être que la classe __GroupStepper__ va en hériter, à voir...
-Cette classe fonctionne par une récursivité sur des pointeurs de tableaux de pointeurs de référence de template. L'utilisation des pointeurs s'avère difficile en Arduino parce que comme on programme dans l'espace noyau, on ne bénéficie pas des protections de l'espace utilisateur (erreurs de segmentation...) et donc le code est difficile à valider. Pour plus d'infos: https://fr.wikipedia.org/wiki/Espace_noyau https://fr.wikipedia.org/wiki/Espace_utilisateur.
+Cette classe fonctionne par une récursivité sur des pointeurs de tableaux de pointeurs de référence de template. L'utilisation des pointeurs s'avère difficile en Arduino parce que comme on programme dans l'espace noyau, on ne bénéficie pas des protections de l'espace utilisateur (erreurs de segmentation...) et donc le code est difficile à valider. Pour plus d'infos: https://fr.wikipedia.org/wiki/Espace_noyau https://fr.wikipedia.org/wiki/Espace_utilisateur https://wiki.osdev.org/Main_Page.
 D'autre part le compilateur fournit avec le logiciel Arduino (avr-g++) ne gère pas par défaut les exceptions (try, catch...). Il semblerait cependant qu'il soit possible d'activer cette fonctionnalité. Pour garder mon code le plus portable possible, j'ai décidé de ne pas utiliser les excptions. Il en résulte malheureusement un code un peu moins propre, et ce d'autant plus qu'on programme dans l'espace noyau.
 J'ai prévu un pdf d'explication du code dans le dossier __documents divers__: __pancarvector - explications.pdf__.
 
