@@ -33,4 +33,4 @@ J'ai prévu un pdf d'explication du code dans le dossier __documents divers__: _
 Pour information, j'avais utilisé le cours suivant pour apprendre le langage C++: https://openclassrooms.com/fr/courses/1894236-programmez-avec-le-langage-c
 
 
-Module bluetooth: pancar, 1234
+Module bluetooth: pancar, 1234, 20:15:09:29:35:46
