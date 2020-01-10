@@ -23,6 +23,7 @@ public class TCPClient {
 			PrintWriter writer = new PrintWriter(output, true);
 			for(PDPoint p : listPoints) {
 				writer.println("point:"+p.getX()+","+p.getY());
+				Thread.sleep(100);
 			}
 			writer.println("point:done");
 		} catch (UnknownHostException ex) {
