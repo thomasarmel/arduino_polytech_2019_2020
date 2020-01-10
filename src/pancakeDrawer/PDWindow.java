@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -27,7 +28,9 @@ public class PDWindow extends JFrame {
 	private JMenu menuFichier=new JMenu("Fichier");
 	private JMenuItem menuItemEffacer=new JMenuItem("Effacer");
 	private JMenuItem menuItemEnregistrer=new JMenuItem("Enregistrer");
+	private JMenuItem menuItemEnvoyer=new JMenuItem("Envoyer à l'Arduino");
 	private JMenuItem menuItemQuitter=new JMenuItem("Quitter");
+	private PDWindow thisWindow=this;
 	
 	private Color color=Color.orange;
 	
@@ -69,9 +72,11 @@ public class PDWindow extends JFrame {
 			}
 		});
 		menuItemEnregistrer.addActionListener(new SaveListener());
+		menuItemEnvoyer.addActionListener(new SendListener());
 		
 		menuFichier.add(menuItemEffacer);
 		menuFichier.add(menuItemEnregistrer);
+		menuFichier.add(menuItemEnvoyer);
 		menuFichier.addSeparator();
 		menuFichier.add(menuItemQuitter);
 		
@@ -84,6 +89,23 @@ public class PDWindow extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+		}
+	}
+	
+	class SendListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Thread threadSendToArduino = new Thread() {
+				public void run() {
+					try {
+						TCPClient tcpClient=new TCPClient("192.168.4.1", (short)8122);
+						tcpClient.sendListPoints(pan.getListPoints());
+					} catch(Exception ex) {
+						JOptionPane.showMessageDialog(thisWindow, "Impossible d'envoyer les données à l'Arduino.", "Erreur réseau", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			};
+			threadSendToArduino.start();
 		}
 	}
 	
