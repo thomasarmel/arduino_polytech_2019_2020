@@ -38,4 +38,6 @@ J'ai mis un délai de 100 ms comme ça on n'a pas de souci avec la liaison par c
 Une chose à laquelle il faut penser quand on utilise le petit module wifi ESP8266: les interférences. A la maison tout fonctionnait parfaitement mais dès que j'arrivais en cours mes appareils se déconnectaient tout le temps du wifi. La solution est la suivante: changer le canal d'émission du module.
 J'ai mis le canal 11 (1 par défaut) et j'en ai profité pour changer le SSID afin de repérer **notre** module plus facilement: **pancarduino**.
 
-Pour information ça se fait avec la commande AT suivante: *AT+CWSAP* (https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/)
+Pour information ça se fait avec la commande AT suivante: *AT+CWSAP* (https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/).
+
+De plus il faut attendre que le module démarre avant de lui envoyer les commandes AT. Appeler la fonction *delay()* dans le setup avant les premières commandes AT.
