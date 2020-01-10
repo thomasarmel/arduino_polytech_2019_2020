@@ -30,4 +30,8 @@ public class PDPanel extends JPanel {
 	public void clear() {
 		listePoints.clear();
 	}
+	
+	public List<PDPoint> getListPoints() {
+		return listePoints;
+	}
 }
