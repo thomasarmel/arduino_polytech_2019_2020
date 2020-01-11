@@ -26,7 +26,7 @@ namespace pancar
         byte getTXPin() const;
         String getSSID() const;
         byte getChannel() const;
-        bool getNeedListen() const;
+        bool getNeedListenAtServer() const;
         unsigned short getServerPort() const;
 
         void setRXPin(byte RXPin);
