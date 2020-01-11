@@ -46,7 +46,7 @@ namespace pancar
         byte m_RXPin;
         byte m_TXPin;
         String m_SSID="pancarduino";
-        byte m_channel;
+        byte m_channel=11;
         bool m_needListen=false;
         unsigned short m_serverPort=8122;
         SoftwareSerial *m_ESP8266;
