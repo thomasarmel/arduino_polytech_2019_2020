@@ -45,7 +45,7 @@ byte Wifi::getChannel() const
     return m_channel;
 }
 
-bool Wifi::getNeedListen() const
+bool Wifi::getNeedListenAtServer() const
 {
     return m_needListen;
 }
