@@ -1,8 +1,13 @@
 package pancakeDrawer;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class PDPoint {
+public class PDPoint implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -633480762946283491L;
 	private int x;
 	private int y;
 	private int size;
