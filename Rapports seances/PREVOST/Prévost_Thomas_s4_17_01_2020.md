@@ -19,3 +19,9 @@ Elle va prendre 2 paramètres en argument: une référence vers le Vector de Poi
 Si on met un délai de 0, alors il n'y a pas de délai maximum. Si le Vector contient déjà des points, notre méthode ne fait pas le ménage elle se contente d'ajouter des points.
 De cette façon la fonction d'appel reprend la main régulièrement et on peut détecter les incohérences: normalement le travail de *listenForPoints()* est terminé lorsqu'elle renvoie __true__ cependant si elle renvoie __false__ et que la taille du Vector n'a pas évolué c'est qu'on est face à une incohérence.
 Pour voir un exemple de code en détail, voir l'onglet __Wiki__.
+
+
+
+Toujours entre les 2 séances, j'ai essayé de rendre le programme Java (__pancakeDrawer__) un peu plus ergonomique. Maintenant lorsqu'on envoie des données à l'Arduino il y a une petite jauge de progression en bas du programme. De plus il est possible de sauvegarder et de ré-ouvrir ses croquis (ça fonctionne avec l'interface Serializable).
+
+Il reste dependant quelques problèmes d'instabilité du programme Arduino avec le transfert: Java semble dire que le transfert se déroule correctement mais rien ne s'affiche sur le moniteur série. Ca arrive surtout lorsqu'il y a beaucoup de points. C'est assez curieux. Pour l'instant mes "suspects" sont: la liaison série, la faible quantité de RAM de la carte Arduino et ma classe Vector (quoique à mon sens il n'y a que le destructeur qui soit vraiment "mal programmé").
