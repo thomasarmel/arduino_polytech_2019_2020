@@ -34,4 +34,8 @@ public class PDPanel extends JPanel {
 	public List<PDPoint> getListPoints() {
 		return listePoints;
 	}
+	
+	void setListPoints(List<PDPoint> listPoints) {
+		this.listePoints=new ArrayList<>(listPoints);
+	}
 }
