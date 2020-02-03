@@ -19,4 +19,4 @@ Pour la prochaine séance je vais donc essayer d'arranger ça, le problème vien
 
 
 
-Enfin, nous nous sommes occupés à continuer la structure, notamment à installer les crémaillères et les roues dentées.
+Enfin, nous nous sommes occupés à continuer la structure, notamment à installer les crémaillères et les roues dentées. On a d'ailleurs passé pas mal de temps à chercher des rondelles.
