@@ -1,7 +1,7 @@
 // SOURCE: https://github.com/McNeight/MemoryFree
 
-#ifndef	PANCARMEMORYFREE_H_INCLUDED
-#define PANCARMEMORYFREE_H_INCLUDED
+#ifndef	PANCARMEMORY_H_INCLUDED
+#define PANCARMEMORY_H_INCLUDED
 
 #if ARDUINO >= 100
   #include "Arduino.h"
