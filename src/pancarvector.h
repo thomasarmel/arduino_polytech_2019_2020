@@ -29,26 +29,30 @@ template <typename T>
         T &operator[](unsigned int index) const;
         void operator+=(Vector<T> v);
         void operator+=(const T &element);
-        bool remove(unsigned int index);
+        bool remove(unsigned int index, bool deletePointerToElement=false, void** pointerToPointerOfElementRemoved=nullptr);
         int searchPtr(T *ptr) const;
+        bool getDestructorNeedsToDeletePointersToElements() const;
+        void setDestructorNeedsToDeletePointersToElements(bool needs);
 
     protected:
         unsigned int m_size;
         void *m_firstElementArray[2];
+        bool m_destructorNeedsToDeletePointersToElements;
     };
 
     template <typename T>
-    Vector<T>::Vector() : m_size(0)
+    Vector<T>::Vector() : m_size(0), m_destructorNeedsToDeletePointersToElements(false)
     {}
 
     template <typename T>
     Vector<T>::~Vector()
     {
-        if(m_size>=2)
+        if(m_size>=1)
         {
-            for(unsigned int i=1; i<m_size; i++)
+            unsigned int size=m_size;
+            for(unsigned int i=0; i<size; i++)
             {
-                remove(i); /// Not really clean, sorry...
+                remove((size-1)-i, m_destructorNeedsToDeletePointersToElements); /// Not really clean, sorry...
             }
         }
     }
@@ -125,7 +129,7 @@ template <typename T>
     }
 
     template<typename T>
-    bool Vector<T>::remove(unsigned int index)
+    bool Vector<T>::remove(unsigned int index, bool deletePointerToElement, void** pointerToPointerOfElementRemoved)
     {
         if(m_size<=index)
         {
@@ -133,6 +137,14 @@ template <typename T>
         }
         if(index==0)
         {
+            if(pointerToPointerOfElementRemoved!=nullptr)
+            {
+                *pointerToPointerOfElementRemoved=m_firstElementArray[0];
+            }
+            if(deletePointerToElement)
+            {
+                delete m_firstElementArray[0];
+            }
             m_firstElementArray[0]=(*((void*(*)[2])m_firstElementArray[1]))[0];
             m_firstElementArray[1]=(*((void*(*)[2])m_firstElementArray[1]))[1];
         }
@@ -144,6 +156,14 @@ template <typename T>
                 pointerNext=(*((void*(*)[2])pointerNext))[1];
             }
             void **pointerToDelete=(void**)((*((void*(*)[2])pointerNext))[1]);
+            if(pointerToPointerOfElementRemoved!=nullptr)
+            {
+                *pointerToPointerOfElementRemoved=(*((void*(*)[2]) (*((void*(*)[2])pointerNext))[1] ))[0];
+            }
+            if(deletePointerToElement)
+            {
+                delete (*((void*(*)[2]) (*((void*(*)[2])pointerNext))[1] ))[0];
+            }
             (*((void*(*)[2])pointerNext))[1]=(*((void*(*)[2]) (*((void*(*)[2])pointerNext))[1] ))[1];
             delete pointerToDelete;
         }
@@ -171,6 +191,18 @@ template <typename T>
             }
         }
         return -1;
+    }
+
+    template<typename T>
+    bool Vector<T>::getDestructorNeedsToDeletePointersToElements() const
+    {
+        return m_destructorNeedsToDeletePointersToElements;
+    }
+
+    template<typename T>
+    void Vector<T>::setDestructorNeedsToDeletePointersToElements(bool needs)
+    {
+        m_destructorNeedsToDeletePointersToElements=needs;
     }
 
     template<typename T>
