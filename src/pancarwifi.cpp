@@ -105,7 +105,6 @@ bool Wifi::listenForPoints(Vector<Point> &listPoints, unsigned long delayMaxMill
     unsigned long timeToStopLoop=millis()+delayMaxMillis;
     bool writingLine=false;
     String pointStr;
-    pancar::Vector<String> listePoints;
     char carRcv;
     while(infiniteLoop || (millis()<timeToStopLoop))
     {
